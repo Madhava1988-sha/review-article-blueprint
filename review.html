@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PhD Review Article – Ultimate Method Blueprint (UI Version)</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-elev: #02081a;
+      --bg-soft: #0b1120;
+      --border-subtle: #1f2937;
+      --border-strong: #334155;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.08);
+      --accent-2: #22c55e;
+      --accent-2-soft: rgba(34, 197, 94, 0.08);
+      --accent-3: #f97316;
+      --accent-3-soft: rgba(249, 115, 22, 0.1);
+      --accent-4: #a855f7;
+      --accent-4-soft: rgba(168, 85, 247, 0.1);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-soft: #6b7280;
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --shadow-strong: 0 22px 60px rgba(15, 23, 42, 0.85);
+      --shadow-soft: 0 16px 38px rgba(15, 23, 42, 0.8);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, #0b1120 0, #020617 50%, #000 100%),
+        radial-gradient(circle at bottom right, #020617 0, #000 50%);
+      color: var(--text-main);
+    }
+
+    a { color: var(--accent); }
+
+    .page {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 22px 16px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 0.9fr);
+      gap: 22px;
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .sidebar {
+        position: static;
+        top: auto;
+      }
+    }
+
+    /* HERO */
+
+    .hero {
+      background:
+        radial-gradient(circle at top left, #1d283a 0, #020617 60%, #000 100%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-strong);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.2), transparent 55%),
+        radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.18), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .hero-title-block {
+      max-width: 640px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.92);
+      color: #e5e7eb;
+      white-space: nowrap;
+    }
+
+    .pill .icon { font-size: 0.9rem; }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 2.4vw, 2.25rem);
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      margin: 3px 0 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      min-width: 260px;
+      max-width: 420px;
+    }
+
+    .metric-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 8px 9px;
+    }
+
+    .metric-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+
+    .metric-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .metric-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .metric-bar {
+      height: 4px;
+      border-radius: 999px;
+      background: #020617;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+
+    .metric-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent), var(--accent-4));
+      width: var(--width, 70%);
+    }
+
+    .stepper {
+      margin-top: 10px;
+      padding: 7px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.96);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+
+    .stepper-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      padding-right: 6px;
+      border-right: 1px solid rgba(55, 65, 81, 0.9);
+      margin-right: 2px;
+      flex-shrink: 0;
+    }
+
+    .step-pill {
+      font-size: 0.76rem;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: #020617;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .step-pill.primary {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: #e0f2fe;
+    }
+
+    .step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+    }
+
+    .step-pill.primary .step-dot {
+      background: var(--accent-2);
+    }
+
+    .hero-note {
+      margin-top: 9px;
+      font-size: 0.84rem;
+      color: var(--text-soft);
+    }
+
+    /* MAIN CONTENT */
+
+    .content {
+      background: var(--bg-elev);
+      border-radius: 24px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 16px 18px;
+    }
+
+    section {
+      margin-bottom: 22px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(30, 64, 175, 0.7);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      margin-bottom: 3px;
+    }
+
+    h2 {
+      margin: 0 0 6px;
+      font-size: 1.26rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    h3 {
+      margin: 10px 0 2px;
+      font-size: 1rem;
+    }
+
+    p {
+      margin: 4px 0;
+      font-size: 0.93rem;
+      color: var(--text-main);
+    }
+
+    small {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    ul, ol {
+      padding-left: 1.25em;
+      margin: 4px 0;
+    }
+
+    li {
+      margin: 2px 0;
+      font-size: 0.92rem;
+    }
+
+    code {
+      background: #020617;
+      border-radius: 4px;
+      padding: 1px 4px;
+      border: 1px solid #1f2937;
+      font-size: 0.84rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    pre {
+      background: #020617;
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid var(--border-strong);
+      overflow-x: auto;
+      font-size: 0.85rem;
+    }
+
+    /* LAYOUT HELPERS */
+
+    .two-col {
+      display: grid;
+      gap: 10px;
+    }
+
+    @media (min-width: 880px) {
+      .two-col {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .three-col {
+      display: grid;
+      gap: 10px;
+    }
+
+    @media (min-width: 1040px) {
+      .three-col {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: linear-gradient(145deg, #020617, #020818);
+      padding: 8px 10px;
+    }
+
+    .card-header {
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-soft);
+    }
+
+    .badge.accent {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: #e0f2fe;
+    }
+
+    .badge.warn {
+      border-color: var(--accent-3);
+      background: var(--accent-3-soft);
+      color: #fed7aa;
+    }
+
+    .badge.good {
+      border-color: var(--accent-2);
+      background: var(--accent-2-soft);
+      color: #bbf7d0;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    /* CALLOUTS */
+
+    .note, .warning, .success {
+      border-radius: var(--radius-md);
+      padding: 9px 11px;
+      margin: 7px 0;
+      font-size: 0.9rem;
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+    }
+
+    .note {
+      border: 1px solid rgba(56, 189, 248, 0.55);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.09), #020617 60%);
+    }
+
+    .warning {
+      border: 1px solid rgba(249, 115, 22, 0.7);
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.15), #020617 60%);
+    }
+
+    .success {
+      border: 1px solid rgba(34, 197, 94, 0.6);
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.1), #020617 60%);
+    }
+
+    .callout-icon {
+      font-size: 1.05rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .callout-body strong {
+      display: inline-block;
+      margin-bottom: 1px;
+    }
+
+    .example {
+      border-left: 3px solid var(--accent-2);
+      background: var(--accent-2-soft);
+      border-radius: 12px;
+      padding: 8px 10px;
+      margin: 6px 0 10px;
+      font-size: 0.9rem;
+    }
+
+    .example-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #bbf7d0;
+      margin-bottom: 1px;
+    }
+
+    /* DETAILS (ACCORDION) */
+
+    details {
+      margin: 4px 0 9px;
+      border-radius: 14px;
+      background: #020617;
+      border: 1px solid var(--border-subtle);
+      padding: 6px 9px 7px;
+    }
+
+    details > summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      list-style: none;
+      outline: none;
+    }
+
+    details > summary::marker,
+    details > summary::-webkit-details-marker { display: none; }
+
+    details > summary::before {
+      content: "▸";
+      margin-right: 6px;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    details[open] > summary::before { content: "▾"; }
+
+    details[open] {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.2);
+    }
+
+    .details-body {
+      margin-top: 6px;
+      border-top: 1px dashed rgba(55, 65, 81, 0.9);
+      padding-top: 6px;
+      font-size: 0.9rem;
+    }
+
+    /* TABLES */
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0;
+      font-size: 0.86rem;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #020617;
+      border: 1px solid var(--border-strong);
+    }
+
+    th, td {
+      padding: 6px 7px;
+      border-bottom: 1px solid rgba(55, 65, 81, 0.9);
+      vertical-align: top;
+    }
+
+    th {
+      background: #020617;
+      font-weight: 600;
+      color: #e5e7eb;
+      text-align: left;
+    }
+
+    tr:nth-child(even) td {
+      background: #020617;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    /* CHECKLIST */
+
+    .checklist {
+      border-radius: 16px;
+      border: 1px solid var(--border-strong);
+      background: #020617;
+      padding: 10px 11px;
+      margin: 9px 0;
+    }
+
+    .checklist-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .checklist-title span.icon { font-size: 0.95rem; }
+
+    .checklist-grid {
+      display: grid;
+      gap: 4px;
+    }
+
+    @media (min-width: 880px) {
+      .checklist-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .check-item {
+      font-size: 0.9rem;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      color: var(--text-main);
+    }
+
+    .check-tick {
+      margin-top: 2px;
+      font-size: 0.9rem;
+      color: var(--accent-2);
+    }
+
+    /* EVIDENCE PYRAMID (UI) */
+
+    .pyramid {
+      margin-top: 6px;
+      border-radius: 18px;
+      border: 1px solid var(--border-strong);
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), #020617 65%);
+      padding: 9px 11px;
+    }
+
+    .pyramid-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 3px 0;
+    }
+
+    .pyramid-bar {
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-4), var(--accent), var(--accent-2));
+      flex: 1;
+    }
+
+    .pyramid-label {
+      font-size: 0.82rem;
+      color: #e5e7eb;
+      min-width: 150px;
+    }
+
+    .pyramid-note {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      position: sticky;
+      top: 16px;
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sidebar-card {
+      border-radius: 20px;
+      background: linear-gradient(160deg, #020617, #02091e);
+      border: 1px solid var(--border-subtle);
+      padding: 11px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .sidebar-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 0.86rem;
+    }
+
+    .toc-list a {
+      text-decoration: none;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 6px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+
+    .toc-list a:hover {
+      background: #020617;
+      border-color: rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    .toc-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toc-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.8);
+    }
+
+    .toc-tag {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    .sidebar-mini {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 6px;
+      border-radius: 12px;
+      border: 1px dashed var(--border-subtle);
+      padding: 6px 8px;
+      background: #020617;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .level-grid {
+      display: grid;
+      gap: 5px;
+      margin-top: 6px;
+      font-size: 0.83rem;
+    }
+
+    .level-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: #020617;
+      border: 1px solid rgba(30, 64, 175, 0.8);
+    }
+
+    .level-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #4ade80;
+    }
+
+    .level-dot.mid { background: #facc15; }
+    .level-dot.low { background: #f97316; }
+
+    .timeline {
+      margin-top: 7px;
+      border-radius: 14px;
+      border: 1px dashed var(--border-subtle);
+      padding: 7px 8px;
+      background: #020617;
+      font-size: 0.82rem;
+    }
+
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 3px 0;
+    }
+
+    .timeline-bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 2px solid var(--accent);
+    }
+
+    .timeline-label { color: var(--text-soft); }
+    .timeline-time { margin-left: auto; color: var(--text-muted); }
+
+    /* FAQ TAGS */
+
+    .qa-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .qa-pill {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-radius: var(--radius-pill);
+      padding: 2px 7px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-soft);
+      background: #020617;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <!-- MAIN COLUMN -->
+  <div>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="hero-top">
+          <div class="hero-title-block">
+            <div class="hero-pills">
+              <span class="pill"><span class="icon">🎓</span>PhD Review Engine</span>
+              <span class="pill"><span class="icon">🧠</span>Synthesis-Based Methods</span>
+              <span class="pill"><span class="icon">🔍</span>PRISMA &amp; Evidence Levels</span>
+            </div>
+            <h1>A Practical Blueprint for Writing a Defensible Review Article</h1>
+            <p class="subtitle">
+              Use this as your “control panel” for designing, running, and writing a review article that is
+              systematic, transparent, and almost impossible to attack on methodology if you follow it honestly. :contentReference[oaicite:0]{index=0}
+            </p>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric-card">
+              <div class="metric-label">Method rigor</div>
+              <div class="metric-value">Evidence-based</div>
+              <div class="metric-sub">PRISMA + IOM + Cochrane</div>
+              <div class="metric-bar"><span style="--width:92%;"></span></div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Clarity for readers</div>
+              <div class="metric-value">Very high</div>
+              <div class="metric-sub">Phase-by-phase UI</div>
+              <div class="metric-bar"><span style="--width:88%;"></span></div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Doubt protection</div>
+              <div class="metric-value">Strong</div>
+              <div class="metric-sub">If you don’t skip steps</div>
+              <div class="metric-bar"><span style="--width:95%;"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stepper">
+          <div class="stepper-label">Execution path</div>
+          <div class="step-pill primary"><span class="step-dot"></span> Choose typology</div>
+          <div class="step-pill"><span class="step-dot"></span> Build team &amp; question</div>
+          <div class="step-pill"><span class="step-dot"></span> Protocol &amp; standards</div>
+          <div class="step-pill"><span class="step-dot"></span> Search &amp; screening</div>
+          <div class="step-pill"><span class="step-dot"></span> Extraction &amp; appraisal</div>
+          <div class="step-pill"><span class="step-dot"></span> Synthesis &amp; writing</div>
+        </div>
+
+        <p class="hero-note">
+          Read once from top to bottom. After that, treat each section as a module: when you are “in” Phase 3 in your
+          actual work, keep the Phase 3 block on your screen and tick the checklists. If you skip a box, accept that
+          the weakness is your choice, not the method’s.
+        </p>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- SECTION 0: SYNTHESIS VS NARRATIVE -->
+      <section id="foundation">
+        <div class="section-kicker">Zero point · Before everything</div>
+        <h2>
+          Decide: Synthesis-Based Review or Narrative Opinion Piece
+          <span class="section-tag">Non-negotiable</span>
+        </h2>
+
+        <p>
+          The PDF is clear: many “reviews” in journals are actually loose narrative summaries with selective evidence
+          and weak appraisal. They are easy to write and easy to criticize. If your PhD review is narrative-style, it is
+          not strong evidence. :contentReference[oaicite:1]{index=1}
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge warn">Avoid</span>
+              Narrative / “just a literature review”
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Studies picked informally (“I chose the main papers I know”).</li>
+                <li>No explicit inclusion/exclusion criteria.</li>
+                <li>Search often limited to one database or even just Google Scholar.</li>
+                <li>Little or no formal quality appraisal.</li>
+                <li>High risk of cherry-picking and personal bias.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">Example – weak narrative PhD review</div>
+                <p>
+                  “I searched Google Scholar with two keywords and selected 30 articles that seemed important. Then I
+                  grouped them and described the findings.”  
+                  This sounds simple, but it will not pass as serious evidence synthesis in a tough viva.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge good">Use</span>
+              Synthesis-based review (what this blueprint supports)
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Pre-planned protocol and review question.</li>
+                <li>Transparent multi-database search, documented and reproducible.</li>
+                <li>Clear inclusion/exclusion rules, applied systematically.</li>
+                <li>Formal appraisal of study quality / risk of bias.</li>
+                <li>Structured synthesis (meta-analysis or organized narrative).</li>
+                <li>Reporting guided by standards like PRISMA, IOM, MECIR. </li>
+              </ul>
+              <div class="example">
+                <div class="example-label">Example – synthesis-based PhD review</div>
+                <p>
+                  You write a protocol, run a documented search in four databases with librarian input, use two reviewers
+                  for screening, extract data into standardized tables, appraise each study, and synthesize results using
+                  methods planned in advance. Anyone can replay your steps.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="warning">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <strong>Hard line:</strong> If you want your review to be strong evidence, you <em>must</em> treat it as a
+            synthesis project, not as a “reading summary”. That is the entire logic of the PDF you gave. :contentReference[oaicite:3]{index=3}
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 1: TYPOLOGY DASHBOARD -->
+      <section id="typology">
+        <div class="section-kicker">Phase 0 · Typology</div>
+        <h2>
+          Review Typology Dashboard: Pick the Right Method
+          <span class="section-tag">From the PDF table</span>
+        </h2>
+
+        <p>
+          The PDF lists common synthesis methods (meta-analysis, systematic, scoping, rapid, mapping, umbrella) and
+          explains how they differ in search depth, appraisal, and synthesis style. This dashboard turns that into a
+          UI you can act on directly. 
+        </p>
+
+        <div class="three-col">
+          <!-- META-ANALYSIS -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge accent">MA</span>
+              Meta-analysis
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Goal:</strong> Combine effect sizes statistically to give a pooled estimate.</li>
+                <li><strong>Search:</strong> Full systematic search across multiple databases, unbiased.</li>
+                <li><strong>Protocol:</strong> Normally required and written in advance.</li>
+                <li><strong>Appraisal:</strong> Formal quality and risk-of-bias assessment for each study.</li>
+                <li><strong>Synthesis:</strong> Statistical pooling, forest plots, effect sizes, confidence intervals.</li>
+                <li><strong>Visuals:</strong> Forest plots, tables, graphs to show combined impact.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">When to use</div>
+                <p>
+                  You have several trials that measure the same outcome (for example HbA1c, depression score,
+                  falls). You want “what is the best estimate across all reliable studies?”.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SYSTEMATIC REVIEW -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge accent">SR</span>
+              Systematic review
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Goal:</strong> Summarize and appraise all relevant evidence using structured methods.</li>
+                <li><strong>Search:</strong> Comprehensive, unbiased, documented search.</li>
+                <li><strong>Protocol:</strong> Planned in advance, ideally registered.</li>
+                <li><strong>Appraisal:</strong> Explicit quality assessment.</li>
+                <li><strong>Synthesis:</strong> Tabular + narrative; may or may not include meta-analysis.</li>
+                <li><strong>Visuals:</strong> Summary tables, graphs, PRISMA flow chart.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">When to use</div>
+                <p>
+                  You want to answer a focused question (“Does X improve Y for Z?”) but outcomes or methods differ
+                  slightly between studies, or data are not easily pooled.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCOPING -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">SCOPING</span>
+              Scoping review
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Goal:</strong> Map key concepts, evidence types, and gaps.</li>
+                <li><strong>Search:</strong> Broad, still systematic and as unbiased as possible.</li>
+                <li><strong>Protocol:</strong> Often flexible; not always mandatory, but still wise.</li>
+                <li><strong>Appraisal:</strong> Not always required, but strongly recommended.</li>
+                <li><strong>Synthesis:</strong> Mainly descriptive tables and narrative mapping.</li>
+                <li><strong>Visuals:</strong> Concept maps, tables showing where evidence exists and where it doesn’t.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">When to use</div>
+                <p>
+                  Your topic is broad and emerging, for example “How are AI tools used to support PhD students?”
+                  You want to see what is out there before doing a very focused systematic review.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="three-col">
+          <!-- RAPID -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">RAPID</span>
+              Rapid review
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Goal:</strong> Give a timely picture of what is known on a policy/practice issue.</li>
+                <li><strong>Search:</strong> Streamlined but still systematic and transparent.</li>
+                <li><strong>Protocol:</strong> Brief protocol describing shortcuts used.</li>
+                <li><strong>Appraisal:</strong> Often simplified but not ignored.</li>
+                <li><strong>Synthesis:</strong> Condensed narrative + key tables.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">When to use</div>
+                <p>
+                  Decision-makers need an answer in months, not years – for example “What do we know about online
+                  learning during lockdowns?”.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAPPING -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">MAPPING</span>
+              Mapping review
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Goal:</strong> Categorize existing studies and highlight research gaps.</li>
+                <li><strong>Search:</strong> Shaped by time and scope limits but still systematic.</li>
+                <li><strong>Appraisal:</strong> Usually no detailed quality rating.</li>
+                <li><strong>Synthesis:</strong> Tables and figures showing study types, topics, populations.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">When to use</div>
+                <p>
+                  You want a “map of the battlefield”, for example which populations and outcomes are covered in
+                  fall-prevention research, and which are ignored.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- UMBRELLA -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">UMBRELLA</span>
+              Umbrella / Overview review
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>Goal:</strong> Summarize what multiple systematic reviews/meta-analyses together show.</li>
+                <li><strong>Search:</strong> Focused on finding review articles, not individual trials.</li>
+                <li><strong>Protocol:</strong> Planned a priori, includes how reviews will be appraised (AMSTAR, ROBIS). :contentReference[oaicite:5]{index=5}</li>
+                <li><strong>Appraisal:</strong> Quality of the included reviews themselves is rated.</li>
+                <li><strong>Synthesis:</strong> Graphical and tabular summary across reviews.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">When to use</div>
+                <p>
+                  The field is already full of systematic reviews. You want a “review of reviews” – for example all
+                  existing systematic reviews on exercise and falls in older adults.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checklist">
+          <div class="checklist-title">
+            <span class="icon">🧭</span>
+            <span>Typology decision – you are not allowed to stay vague</span>
+          </div>
+          <div class="checklist-grid">
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>You can name exactly which type you are doing (e.g., “systematic review”, “scoping review”).</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>Your chosen type matches your question and the maturity of the field.</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>Your methods later in the paper match the expectations for that type (search, appraisal, synthesis).</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>You can defend, in one sentence, why you did <em>this</em> type and not another.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: FIVE-PHASE ENGINE FROM PDF -->
+      <section id="phases">
+        <div class="section-kicker">Phase stack · From the figure</div>
+        <h2>
+          Five-Phase Review Engine (Directly Reflecting the PDF Figure)
+          <span class="section-tag">Process spine</span>
+        </h2>
+
+        <p>
+          The PDF breaks a good review into five phases: Protocol, Search, Inclusion, Data, Report. This is your
+          backbone. Every serious review method you pick must pass through these stages. 
+        </p>
+
+        <div class="two-col">
+          <!-- LEFT: PHASE LIST -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge accent">Pipeline</span>
+              Phase summary
+            </div>
+            <div class="card-body">
+              <ol>
+                <li><strong>Protocol:</strong> Team, focused question, predefined methods, protocol registration.</li>
+                <li><strong>Search:</strong> Define concepts and databases, build strategy with librarian, manage citations.</li>
+                <li><strong>Inclusion:</strong> Apply criteria, record reasons for exclusion, keep a clear database trail.</li>
+                <li><strong>Data:</strong> Extract data using a predefined form and appraise quality / risk of bias.</li>
+                <li><strong>Report:</strong> Synthesize, interpret strengths/limitations, make recommendations, publish.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- RIGHT: UI BAR VISUAL -->
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">Visual</span>
+              Phase completion tracker
+            </div>
+            <div class="card-body">
+              <div class="timeline">
+                <div class="timeline-row">
+                  <div class="timeline-bullet"></div>
+                  <div class="timeline-label"><strong>Protocol</strong> – team + question + plan done?</div>
+                  <div class="timeline-time">Month 1–2</div>
+                </div>
+                <div class="timeline-row">
+                  <div class="timeline-bullet"></div>
+                  <div class="timeline-label"><strong>Search</strong> – all databases searched, strings saved?</div>
+                  <div class="timeline-time">Month 2–3</div>
+                </div>
+                <div class="timeline-row">
+                  <div class="timeline-bullet"></div>
+                  <div class="timeline-label"><strong>Inclusion</strong> – screening + reasons recorded?</div>
+                  <div class="timeline-time">Month 3–4</div>
+                </div>
+                <div class="timeline-row">
+                  <div class="timeline-bullet"></div>
+                  <div class="timeline-label"><strong>Data</strong> – extraction + appraisal complete?</div>
+                  <div class="timeline-time">Month 4–6</div>
+                </div>
+                <div class="timeline-row">
+                  <div class="timeline-bullet"></div>
+                  <div class="timeline-label"><strong>Report</strong> – synthesis + manuscript written?</div>
+                  <div class="timeline-time">Month 6–9</div>
+                </div>
+              </div>
+              <p style="margin-top:6px;font-size:0.85rem;color:var(--text-soft);">
+                You can literally print this block and tick each item by date. If your review skips a phase, admit
+                it in the limitations; don’t pretend it was “systematic”.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PER-PHASE DETAILS -->
+        <details>
+          <summary>See deep explanation + example for each phase</summary>
+          <div class="details-body">
+            <div class="two-col">
+              <div>
+                <h3>Phase 1 – Protocol</h3>
+                <ul>
+                  <li>Set up your team (you, supervisor, second reviewer, librarian if possible).</li>
+                  <li>Write the review question using PICOS (or PCC for scoping).</li>
+                  <li>Write a protocol that covers eligibility, search, screening, extraction, appraisal, synthesis.</li>
+                  <li>Register or publicly time-stamp the protocol (PROSPERO, OSF, or journal protocol article).</li>
+                </ul>
+                <div class="example">
+                  <div class="example-label">Example – PhD mental health review</div>
+                  <p>
+                    You decide to do a scoping review on digital tools for PhD student mental health. Your protocol
+                    states exactly who counts as “PhD student”, what counts as “digital tool”, which outcomes you accept
+                    (depression, anxiety, stress scores), which databases you will search, and that you will chart
+                    data into predefined tables without doing a meta-analysis.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3>Phase 2 – Search</h3>
+                <ul>
+                  <li>Break your question into core concepts.</li>
+                  <li>Work with a librarian to expand concepts into controlled terms + keywords.</li>
+                  <li>Run searches in all databases you promised, record search dates and strings.</li>
+                  <li>Export results, remove duplicates, keep a search log.</li>
+                </ul>
+                <div class="example">
+                  <div class="example-label">Example – concepts for PhD mental health</div>
+                  <p>
+                    Concepts: (1) doctoral students, (2) mental health, (3) digital tools. For each you build
+                    synonyms (e.g., “doctoral candidate”, “PhD student”, etc.) and combine with <code>AND</code>/<code>OR</code>
+                    across databases. You save every final string in an appendix.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <h3>Phase 3 – Inclusion</h3>
+                <ul>
+                  <li>Two reviewers independently screen titles/abstracts.</li>
+                  <li>Two reviewers screen full texts and decide include/exclude.</li>
+                  <li>For every excluded full text, you log a precise reason (wrong population, wrong design, etc.).</li>
+                  <li>Later, this feeds the PRISMA flow diagram.</li>
+                </ul>
+                <div class="example">
+                  <div class="example-label">Example – tough but fair decision</div>
+                  <p>
+                    A paper looks “perfect” conceptually but actually includes mixed undergraduates and PhD students,
+                    without separate data. Your protocol says you only include studies where you can extract data for
+                    PhD students. You therefore exclude it, and you log the reason as “mixed population, PhD data not
+                    separable”. That’s discipline.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3>Phase 4 – Data</h3>
+                <ul>
+                  <li>You extract all predefined variables into structured tables.</li>
+                  <li>You run your chosen risk-of-bias or quality assessment tool on each study.</li>
+                  <li>You do not change your extraction items in the middle unless you update the protocol.</li>
+                </ul>
+                <div class="example">
+                  <div class="example-label">Example – extraction form</div>
+                  <p>
+                    For each study on PhD writing bootcamps you capture: study design, number of participants,
+                    country, bootcamp format, length, outcomes (words written, chapters finished, self-reported
+                    confidence), follow-up length, risk-of-bias rating. All in one table.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <h3>Phase 5 – Report</h3>
+                <ul>
+                  <li>Decide if a meta-analysis is justified; if not, structure a narrative synthesis.</li>
+                  <li>Write methods fully so someone else can repeat your work.</li>
+                  <li>Summarize results with tables, graphs, and clear text.</li>
+                  <li>Point out strengths and limitations honestly, including any deviations from protocol.</li>
+                </ul>
+                <div class="example">
+                  <div class="example-label">Example – honest limitation</div>
+                  <p>
+                    You planned to include all languages, but in reality you only screened English and French. You
+                    admit this clearly in the methods and discussion, rather than pretending the review is language-free.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3>Connect to standards</h3>
+                <p>
+                  PRISMA and IOM standards literally mirror this five-phase logic: protocol, search, selection,
+                  synthesis, reporting. Using them is not “extra work”, it is just doing these phases properly and
+                  documenting them. 
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SECTION 3: TEAM + ROLES -->
+      <section id="team">
+        <div class="section-kicker">Phase 1 · People</div>
+        <h2>
+          Minimum Review Team and Role Layout
+          <span class="section-tag">Who does what</span>
+        </h2>
+
+        <p>
+          The PDF directly recommends involving a librarian and a review-methods expert where possible. A lonely PhD
+          doing everything in isolation is a red flag; build at least a “lightweight” team around you. :contentReference[oaicite:8]{index=8}
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">Core roles</span>
+              Minimal viable team
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>You (PhD):</strong> topic expert, driver of all work.</li>
+                <li><strong>Supervisor:</strong> content + methods oversight; signs off on protocol, keeps you honest.</li>
+                <li><strong>Second reviewer:</strong> independent screening and risk-of-bias checks.</li>
+                <li><strong>Librarian / information specialist:</strong> designs and refines your search; helps build
+                  search strategy appendix.</li>
+                <li><strong>Statistician (if doing MA):</strong> supports effect size selection, models, heterogeneity tests.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">Example – practical setup</div>
+                <p>
+                  You + supervisor handle the main work. A more senior PhD or postdoc serves as second reviewer. The
+                  university library offers a 1-hour consultation; you use that to clean up the search and then ask the
+                  librarian to check your strings before you lock them in the protocol.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge warn">Reality</span>
+              If you truly have to work alone
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Do a “double screen” of a random subset at two different times to check your own consistency.</li>
+                <li>Ask your supervisor at least to review inclusion/exclusion rules and one sample of decisions.</li>
+                <li>Be explicit in the paper that screening and appraisal were done by one reviewer due to constraints.</li>
+              </ul>
+              <div class="warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-body">
+                  <strong>Important:</strong> hiding that you were the only reviewer is worse than admitting it. Reviewers
+                  are more forgiving when you are honest about constraints.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: QUESTION (PICOS/PCC) -->
+      <section id="question">
+        <div class="section-kicker">Phase 2 · Aim</div>
+        <h2>
+          Build a Laser-Focused Review Question (PICOS / PCC)
+          <span class="section-tag">Target lock</span>
+        </h2>
+
+        <p>
+          A fuzzy question produces a fuzzy review. The PDF stresses that synthesis-based reviews must answer focused,
+          clearly formulated questions using explicit methods. :contentReference[oaicite:9]{index=9}
+        </p>
+
+        <h3>For effect / intervention questions (PICOS)</h3>
+        <ul>
+          <li><strong>P</strong> – Population</li>
+          <li><strong>I</strong> – Intervention / exposure</li>
+          <li><strong>C</strong> – Comparison</li>
+          <li><strong>O</strong> – Outcome(s)</li>
+          <li><strong>S</strong> – Study design(s) allowed</li>
+        </ul>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge good">Example</span>
+              Falls and exercise
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>P: community-dwelling adults aged ≥65.</li>
+                <li>I: supervised group exercise ≥8 weeks.</li>
+                <li>C: usual care or no organized exercise.</li>
+                <li>O: number of falls, balance scores.</li>
+                <li>S: randomized controlled trials.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">Final question</div>
+                <p>
+                  “Among community-dwelling adults aged 65 and older, do supervised group exercise programs, compared
+                  with usual care or no structured exercise, reduce falls and improve balance?”
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge good">Example</span>
+              PhD productivity (directly useful to your audience)
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>P: PhD students in any discipline.</li>
+                <li>I: structured writing groups or bootcamps.</li>
+                <li>C: usual unstructured writing (no organized support).</li>
+                <li>O: completed chapters, words written, papers submitted, writing confidence.</li>
+                <li>S: experimental, quasi-experimental, longitudinal cohort.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">Final question</div>
+                <p>
+                  “What is the effect of structured writing groups and bootcamps, compared to usual unstructured writing
+                  practice, on thesis progress, publication output, and writing confidence among PhD students?”
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>For broader scoping questions (PCC style)</h3>
+        <ul>
+          <li><strong>P</strong> – Population (who)</li>
+          <li><strong>C</strong> – Concept (key idea you are mapping)</li>
+          <li><strong>C</strong> – Context (setting / field)</li>
+        </ul>
+
+        <div class="example">
+          <div class="example-label">Example – scoping review, digital mental health for PhDs</div>
+          <p>
+            Population: PhD / doctoral students.  
+            Concept: digital tools for mental health support.  
+            Context: university and doctoral training environments.  
+            Question: “How have digital tools been used to support mental health in PhD students, and what outcomes
+            have been measured?”
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 5: PROTOCOL & STANDARDS -->
+      <section id="protocol">
+        <div class="section-kicker">Phase 3 · Commit</div>
+        <h2>
+          Write and Register a Protocol + Connect to Reporting Standards
+          <span class="section-tag">Guard rails</span>
+        </h2>
+
+        <p>
+          The PDF makes it clear: high-quality reviews are planned, not improvised. Protocol + standards (PRISMA,
+          IOM, Cochrane MECIR, EQUATOR, ICMJE) are your guard rails. 
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge accent">Protocol contents</span>
+              What you write before touching data
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Title with review type in it (e.g., “A systematic review”, “A scoping review”).</li>
+                <li>Background + reason this review is needed now.</li>
+                <li>Exact review question(s) using PICOS/PCC.</li>
+                <li>Eligibility criteria (population, intervention, outcomes, designs, languages, dates, settings).</li>
+                <li>Planned information sources and databases.</li>
+                <li>Initial search strategy for at least one database.</li>
+                <li>Screening process (number of reviewers, how disagreements are handled).</li>
+                <li>Data items you will extract (variables list).</li>
+                <li>Quality / risk-of-bias tools you will use.</li>
+                <li>Synthesis methods (meta-analysis rules, subgroup plans, or narrative templates).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">Standards dock</span>
+              Key frameworks mentioned in the PDF
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>PRISMA</strong> – reporting checklist + flow diagram for systematic reviews and meta-analyses.</li>
+                <li><strong>Cochrane MECIR</strong> – expectations for how to conduct and report intervention reviews.</li>
+                <li><strong>IOM standards</strong> – full standards for systematic reviews (search, selection, synthesis, reporting).</li>
+                <li><strong>EQUATOR network</strong> – hub for reporting guidelines (CONSORT, STROBE, PRISMA, etc.).</li>
+                <li><strong>ICMJE + COPE</strong> – ethics and manuscript guidelines also valid for review papers.</li>
+              </ul>
+              <small>
+                In simple terms: your review lives inside this ecosystem. You don’t have to memorize everything, but
+                you should at least show that your protocol respects these principles.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <details>
+          <summary>Mini protocol example block you can adapt</summary>
+          <div class="details-body">
+            <pre>
+Title:
+  Digital mental health tools for PhD students: A scoping review.
+
+Review type and rationale:
+  Scoping review chosen because the literature is diverse in design, outcomes, and intervention
+  types, and the goal is to map what exists rather than estimate a single effect size.
+
+Objectives:
+  1. Identify types of digital tools used to support mental health of PhD students.
+  2. Summarize reported outcomes (e.g., anxiety, depression, stress, dropout intention).
+  3. Highlight gaps and priorities for future primary research.
+
+Eligibility criteria:
+  - Population: PhD or doctoral students (any discipline).
+  - Concept: digital tools primarily aimed at mental health or emotional support.
+  - Context: higher education / doctoral settings.
+  - Design: any empirical study (quantitative, qualitative, mixed methods).
+  - Language: English.
+  - Time frame: 2000 to present.
+
+Information sources:
+  MEDLINE, PsycINFO, Web of Science, ERIC, Scopus, plus thesis databases and reference lists.
+
+Screening:
+  Two reviewers independently screen titles/abstracts and full texts; disagreements resolved by discussion.
+
+Data charting:
+  Predefined chart with: study design, country, sample size, type of tool, duration, outcomes, key findings.
+
+Appraisal:
+  Basic quality signalling (study design and obvious limitations) reported descriptively.
+
+Synthesis:
+  Narrative and tabular mapping organized by type of tool and outcome.
+            </pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- SECTION 6: SEARCH & SCREEN -->
+      <section id="search-screen">
+        <div class="section-kicker">Phase 4 &amp; 5 · Evidence in, noise out</div>
+        <h2>
+          Search Strategy UI + Screening &amp; PRISMA Logic
+          <span class="section-tag">Evidence funnel</span>
+        </h2>
+
+        <p>
+          This is where most students quietly cut corners. The PDF is explicit: searches must be comprehensive,
+          unbiased, and documented; selection must list reasons for exclusion and end up in PRISMA-style reporting. 
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">Search builder</span>
+              Databases + query design
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Pick at least 2–4 core databases that fit your field.</li>
+                <li>Split your question into concepts and write keywords + subject headings for each.</li>
+                <li>Test the search with a small set of “must-find” known key papers.</li>
+                <li>Record final strings and dates for each database for the appendix.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">Example – concept expansion for PhD mental health</div>
+                <p>
+                  Concept 1 (population): “doctoral student*”, “PhD student*”, “postgraduate research student*”.  
+                  Concept 2 (mental health): “depression”, “anxiety”, “stress”, “psychological distress”.  
+                  Concept 3 (delivery): “app”, “online program*”, “web-based”, “mobile”.  
+                  Final search combines Concept 1 AND Concept 2 AND Concept 3.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">Screening UI</span>
+              From thousands of hits to final set
+            </div>
+            <div class="card-body">
+              <ol>
+                <li>Export search results to a reference manager; remove duplicates.</li>
+                <li>Title/abstract screening by two reviewers (include / exclude / unsure).</li>
+                <li>Full-text screening on all “include” and “unsure”.</li>
+                <li>For each excluded full text, record one main reason (e.g., wrong population).</li>
+              </ol>
+              <div class="example">
+                <div class="example-label">Example – simple exclusion table row</div>
+                <p>
+                  Study ID: X23 – “Wellbeing in postgraduate students”.  
+                  Decision: Excluded.  
+                  Reason: “Mixed population (masters and PhD), PhD data not separated.”
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <details>
+          <summary>Mini screening table layout for your PRISMA flow</summary>
+          <div class="details-body">
+            <table>
+              <thead>
+              <tr>
+                <th>Study ID</th>
+                <th>Title</th>
+                <th>Decision</th>
+                <th>Reason (full-text stage)</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>D01</td>
+                <td>Mobile App for Anxiety in PhD Students</td>
+                <td>Included</td>
+                <td>–</td>
+              </tr>
+              <tr>
+                <td>D02</td>
+                <td>Stress in Graduate Students: A Cross-sectional Survey</td>
+                <td>Excluded</td>
+                <td>Wrong design (no intervention if your question is about interventions).</td>
+              </tr>
+              <tr>
+                <td>D03</td>
+                <td>Online Mindfulness Program for University Students</td>
+                <td>Excluded</td>
+                <td>Population not specific to PhD; cannot separate data.</td>
+              </tr>
+              <tr>
+                <td>D04</td>
+                <td>Doctoral Students’ Use of a Peer-Support Forum</td>
+                <td>Included</td>
+                <td>–</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <div class="checklist">
+          <div class="checklist-title">
+            <span class="icon">🧪</span>
+            <span>Search + screening – honest self-check</span>
+          </div>
+          <div class="checklist-grid">
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>You can show, in an appendix, the exact search string and date for each database.</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>You can reconstruct how many records were found, de-duplicated, screened, and included.</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>Every excluded full text has a reason logged that matches your eligibility rules.</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>You did not quietly discard a “troublesome” study just because it doesn’t support your
+                expectations.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: DATA EXTRACTION + RISK OF BIAS -->
+      <section id="data-risk">
+        <div class="section-kicker">Phase 6 &amp; 7 · Data + trust</div>
+        <h2>
+          Data Extraction Grid + Risk-of-Bias Layer
+          <span class="section-tag">Evidence table</span>
+        </h2>
+
+        <p>
+          The PDF stresses detailed study-characteristics tables and explicit quality evaluation. This section turns
+          that idea into a concrete table layout and appraisal routine. 
+        </p>
+
+        <details>
+          <summary>Template – one main extraction table for your review</summary>
+          <div class="details-body">
+            <table>
+              <thead>
+              <tr>
+                <th>Study</th>
+                <th>Design &amp; sample</th>
+                <th>Population &amp; context</th>
+                <th>Intervention / comparator</th>
+                <th>Outcomes &amp; measures</th>
+                <th>Main results</th>
+                <th>Risk of bias</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Smith 2018 (UK)</td>
+                <td>RCT, n=120, mean age 72</td>
+                <td>Community-dwelling older adults, no severe cognitive issues</td>
+                <td>Group exercise 3×/week, 12 weeks vs usual care</td>
+                <td>Falls at 12 months; Berg Balance Scale; Timed Up and Go</td>
+                <td>25% fewer falls in intervention, improved balance scores</td>
+                <td>Overall low risk</td>
+              </tr>
+              <tr>
+                <td>Lee 2020 (multi-country)</td>
+                <td>Pre-post study, n=48 PhD students</td>
+                <td>Doctoral candidates in STEM faculties</td>
+                <td>Online 6-week stress-management program, no control group</td>
+                <td>Perceived stress scale; depression scale</td>
+                <td>Moderate reduction in stress and depression scores post-program</td>
+                <td>Serious risk (no control, self-selection)</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <h3>Risk-of-bias layer (why it matters)</h3>
+        <p>
+          Risk-of-bias tools help you label how trustworthy each study is. High risk does not mean you must ignore
+          a study, but you should weigh it carefully in your interpretation.
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">Tools</span>
+              Match to design
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Randomized trials – tools like RoB 2.</li>
+                <li>Non-randomized interventions – tools like ROBINS-I.</li>
+                <li>Observational studies – checklists (for example, Newcastle-Ottawa-type logic).</li>
+                <li>Qualitative studies – frameworks like CASP for qualitative research.</li>
+              </ul>
+              <small>
+                You don’t have to use these exact labels in your PhD if your field uses other tools, but you must show
+                that you are judging quality in a structured way.
+              </small>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge">Example</span>
+              Simple risk-of-bias table
+            </div>
+            <div class="card-body">
+              <table>
+                <thead>
+                <tr>
+                  <th>Domain</th>
+                  <th>Smith 2018 RCT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Randomization</td>
+                  <td>Low risk – computer randomization, hidden allocation.</td>
+                </tr>
+                <tr>
+                  <td>Deviations from intervention</td>
+                  <td>Some concerns – participants knew which group they were in.</td>
+                </tr>
+                <tr>
+                  <td>Missing data</td>
+                  <td>Low risk – small, balanced dropout, reasons explained.</td>
+                </tr>
+                <tr>
+                  <td>Outcome measurement</td>
+                  <td>Low risk – validated tools, assessors unaware of group.</td>
+                </tr>
+                <tr>
+                  <td>Selective reporting</td>
+                  <td>Low risk – all planned outcomes reported.</td>
+                </tr>
+                <tr>
+                  <td><strong>Overall judgement</strong></td>
+                  <td><strong>Low risk of bias</strong></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="warning">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <strong>Critical point:</strong> a small, uncontrolled pre-post study with self-selected PhD students
+            cannot carry the same weight as a large, well-designed randomized trial. Your discussion must make this
+            visible, or you will get called out.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8: SYNTHESIS -->
+      <section id="synthesis">
+        <div class="section-kicker">Phase 8 · Putting it together</div>
+        <h2>
+          Synthesis UI: Meta-analysis vs Structured Narrative
+          <span class="section-tag">From numbers to meaning</span>
+        </h2>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="badge accent">If meta-analysis is possible</span>
+              Statistical synthesis
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Check whether outcomes and measures are similar enough to be pooled.</li>
+                <li>Calculate effect sizes per study (risk ratios, mean differences, standardized differences, etc.).</li>
+                <li>Select a model (often random-effects in practice).</li>
+                <li>Measure heterogeneity (I²) and interpret it.</li>
+                <li>Produce forest plots and report pooled effects with confidence intervals.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">Example – older adult exercise</div>
+                <p>
+                  “Ten randomized trials with 1,200 participants show that supervised group exercise reduces falls by
+                  roughly 23% (pooled risk ratio 0.77, 95% CI 0.65–0.91); statistical heterogeneity was modest (I²
+                  around 30%).”
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="badge accent">If meta-analysis is not realistic</span>
+              Narrative synthesis
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Group studies into logical clusters (by intervention type, population, outcome, or context).</li>
+                <li>Describe the direction and approximate size of effect, not just “significant or not”.</li>
+                <li>Bring quality judgements into the story (“most positive findings were from weaker studies”).</li>
+                <li>Use summary tables and figures to support the text.</li>
+              </ul>
+              <div class="example">
+                <div class="example-label">Example – writing support for PhD students</div>
+                <p>
+                  “Three randomized trials and four weaker quasi-experimental studies evaluated structured writing
+                  groups. Trials showed small-to-moderate improvements in short-term writing output, but none examined
+                  outcomes beyond three months. The weaker studies reported positive experiences but had serious design
+                  limitations. Overall, there is reasonable evidence for short-term productivity gains, but evidence
+                  about long-term impact and thesis completion is thin.”
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9: LEVELS OF EVIDENCE -->
+      <section id="levels">
+        <div class="section-kicker">Phase 9 · Strength</div>
+        <h2>
+          Levels of Evidence Pyramid and How Your Review Fits
+          <span class="section-tag">Hierarchy</span>
+        </h2>
+
+        <p>
+          The PDF contains a levels-of-evidence figure based on national guidance. Systematic reviews and meta-analyses
+          of high-quality trials sit at the top, but only if they are done properly. 
+        </p>
+
+        <div class="pyramid">
+          <div class="pyramid-row">
+            <div class="pyramid-label">Systematic reviews / meta-analyses of strong RCTs</div>
+            <div class="pyramid-bar" style="max-width: 70%;"></div>
+          </div>
+          <div class="pyramid-row">
+            <div class="pyramid-label">Individual randomized controlled trials</div>
+            <div class="pyramid-bar" style="max-width: 80%; opacity:0.85;"></div>
+          </div>
+          <div class="pyramid-row">
+            <div class="pyramid-label">Cohort / case-control and similar</div>
+            <div class="pyramid-bar" style="max-width: 60%; opacity:0.75;"></div>
+          </div>
+          <div class="pyramid-row">
+            <div class="pyramid-label">Cross-sectional / case series / reports</div>
+            <div class="pyramid-bar" style="max-width: 45%; opacity:0.6;"></div>
+          </div>
+          <div class="pyramid-row">
+            <div class="pyramid-label">Expert opinion / narrative reviews</div>
+            <div class="pyramid-bar" style="max-width: 30%; opacity:0.5;"></div>
+          </div>
+          <p class="pyramid-note">
+            When you write your discussion and conclusion, you must explicitly connect your claims to where your
+            included evidence sits on this pyramid and how strong your synthesis actually is.
+          </p>
+        </div>
+
+        <div class="example">
+          <div class="example-label">Example – linking conclusion to evidence strength</div>
+          <p>
+            “Because most included PhD mental health studies were small pre-post designs without control groups, the
+            overall certainty is low. Even though short-term changes look positive, we cannot be confident that the
+            interventions cause the improvements. Stronger controlled trials are clearly needed.”
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 10: WRITING + CHECKLIST -->
+      <section id="writing">
+        <div class="section-kicker">Phase 10 · Final output</div>
+        <h2>
+          Writing the Review: Structure + “No-Surprises” Checklist
+          <span class="section-tag">Delivery</span>
+        </h2>
+
+        <h3>Structure that journals and examiners expect</h3>
+        <ol>
+          <li><strong>Title</strong> – states topic and review type clearly.</li>
+          <li><strong>Abstract</strong> – structured; includes key methods and main findings.</li>
+          <li><strong>Introduction</strong> – sets up problem, gap, and your review question.</li>
+          <li><strong>Methods</strong> – protocol, eligibility, search, selection, extraction, appraisal, synthesis.</li>
+          <li><strong>Results</strong> – PRISMA flow, characteristics tables, risk-of-bias summary, outcome-wise findings.</li>
+          <li><strong>Discussion</strong> – main messages, comparison with earlier work, limitations, implications.</li>
+          <li><strong>Conclusion</strong> – specific, evidence-proportionate final statements.</li>
+          <li><strong>Extras</strong> – full search strings, detailed tables, checklists as appendices.</li>
+        </ol>
+
+        <details>
+          <summary>Strong vs weak conclusion side-by-side</summary>
+          <div class="details-body two-col">
+            <div class="example">
+              <div class="example-label">Weak conclusion</div>
+              <p>
+                “Digital tools seem promising for PhD mental health, but more research is needed.”
+              </p>
+              <p>
+                Vague, generic, could be written for any topic. No sense of effect size, certainty, or who this applies
+                to.
+              </p>
+            </div>
+            <div class="example">
+              <div class="example-label">Strong conclusion</div>
+              <p>
+                “Across 11 small, mostly uncontrolled studies with 430 PhD students, digital mental health tools were
+                associated with short-term reductions in self-reported stress and anxiety. Because almost all studies
+                were at serious risk of bias and none followed participants beyond three months, current evidence is
+                low-certainty. Institutions should treat these tools as promising but unproven and prioritize
+                better-designed trials before large-scale roll-out.”
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <div class="checklist">
+          <div class="checklist-title">
+            <span class="icon">✅</span>
+            <span>“No basic doubts on methods” checklist</span>
+          </div>
+          <div class="checklist-grid">
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>Anyone reading your methods can reconstruct your search, screening, and synthesis without guessing.</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>Your review type (systematic, scoping, etc.) is stated in the title and justified in the text.</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>You show at least one main “studies characteristics” table with key variables (year, design, sample, etc.).</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>Risk-of-bias or quality assessments are visible, not just hidden in your head.</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>Your discussion separates what the evidence supports from what is still speculation.</span>
+            </div>
+            <div class="check-item">
+              <span class="check-tick">✔</span>
+              <span>If you deviated from your initial protocol, you say when and why.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="success">
+          <div class="callout-icon">🎯</div>
+          <div class="callout-body">
+            <strong>Bottom line:</strong>
+            <p style="margin-top:2px;">
+              If you follow this blueprint honestly – with the review typology, five phases, standards, search rigor,
+              appraisal, and synthesis all documented – you will remove most of the usual “method doubts” examiners and
+              peer-reviewers throw at PhD-level reviews. People can still disagree with your interpretation or topic,
+              but they will struggle to call your process sloppy.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">
+        <span>Navigation</span>
+        <span>⤵</span>
+      </div>
+      <ul class="toc-list">
+        <li><a href="#foundation"><span class="toc-label"><span class="toc-dot"></span> Synthesis vs narrative</span><span class="toc-tag">Start</span></a></li>
+        <li><a href="#typology"><span class="toc-label"><span class="toc-dot"></span> Typology dashboard</span><span class="toc-tag">0</span></a></li>
+        <li><a href="#phases"><span class="toc-label"><span class="toc-dot"></span> Five-phase engine</span><span class="toc-tag">Core</span></a></li>
+        <li><a href="#team"><span class="toc-label"><span class="toc-dot"></span> Team &amp; roles</span><span class="toc-tag">1</span></a></li>
+        <li><a href="#question"><span class="toc-label"><span class="toc-dot"></span> Review question</span><span class="toc-tag">2</span></a></li>
+        <li><a href="#protocol"><span class="toc-label"><span class="toc-dot"></span> Protocol &amp; standards</span><span class="toc-tag">3</span></a></li>
+        <li><a href="#search-screen"><span class="toc-label"><span class="toc-dot"></span> Search &amp; screening</span><span class="toc-tag">4–5</span></a></li>
+        <li><a href="#data-risk"><span class="toc-label"><span class="toc-dot"></span> Data &amp; risk</span><span class="toc-tag">6–7</span></a></li>
+        <li><a href="#synthesis"><span class="toc-label"><span class="toc-dot"></span> Synthesis</span><span class="toc-tag">8</span></a></li>
+        <li><a href="#levels"><span class="toc-label"><span class="toc-dot"></span> Evidence levels</span><span class="toc-tag">9</span></a></li>
+        <li><a href="#writing"><span class="toc-label"><span class="toc-dot"></span> Writing &amp; checklist</span><span class="toc-tag">10</span></a></li>
+      </ul>
+
+      <div class="sidebar-mini">
+        <strong>How to use this panel:</strong>
+        <p style="margin:2px 0 0;">
+          When you work, keep only the current phase open on screen (for example “Search &amp; screening”). Complete
+          every bullet in that section before jumping forward. If you can’t, note it as a limitation right away.
+        </p>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-title">
+        <span>Method health bar</span>
+        <span>📊</span>
+      </div>
+      <div class="level-grid">
+        <div class="level-item">
+          <span class="level-dot"></span>
+          <span>Transparency of methods</span>
+        </div>
+        <div class="level-item">
+          <span class="level-dot mid"></span>
+          <span>Search completeness</span>
+        </div>
+        <div class="level-item">
+          <span class="level-dot"></span>
+          <span>Screening discipline</span>
+        </div>
+        <div class="level-item">
+          <span class="level-dot"></span>
+          <span>Quality / bias assessment</span>
+        </div>
+        <div class="level-item">
+          <span class="level-dot low"></span>
+          <span>Over-claiming in conclusions</span>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-label">Protocol + question locked</div>
+          <div class="timeline-time">Week 4</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-label">Search concluded</div>
+          <div class="timeline-time">Week 8–10</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-label">Screening + extraction done</div>
+          <div class="timeline-time">Week 16–20</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-label">Synthesis + draft written</div>
+          <div class="timeline-time">Week 28+</div>
+        </div>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge accent">Uses PDF guidance</span>
+        <span class="badge">PRISMA-aware</span>
+        <span class="badge">PhD-ready</span>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-title">
+        <span>Instant Q&amp;A</span>
+        <span>❓</span>
+      </div>
+      <div class="qa-pill-row">
+        <span class="qa-pill">“Is this really systematic?”</span>
+        <span class="qa-pill">“Why this review type?”</span>
+        <span class="qa-pill">“How did you pick studies?”</span>
+        <span class="qa-pill">“Can I repeat this?”</span>
+      </div>
+      <p style="margin-top:6px;font-size:0.83rem;color:var(--text-soft);">
+        Any time you’re unsure, ask yourself those four questions and look at the relevant section in this blueprint.
+        If you cannot answer clearly, that’s the exact place you still need to fix.
+      </p>
+    </div>
+  </aside>
+</div>
+
+</body>
+</html>
