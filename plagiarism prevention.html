@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plagiarism detection and prevention: a primer for researchers</title>
+  <style>
+    :root{
+      --bg:#ffffff; --text:#000000; --muted:#444;
+      --green:#8bc34a; --yellow:#ffd54f; --blue:#cfe3ff;
+      --card:#fbfbfb; --border:#e6e6e6; font-family:Inter,Arial,sans-serif;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text)}
+    .wrap{max-width:1400px;margin:20px auto;padding:24px}
+    header{display:flex;gap:16px;align-items:center}
+    .logo{width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,var(--green),var(--yellow));display:flex;justify-content:center;align-items:center;font-weight:800;font-size:20px}
+    h1{margin:0;font-size:26px}
+    p.lead{color:var(--muted);margin:6px 0 0;font-size:15px}
+    nav{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+    .navlink{padding:8px 12px;border:1px solid var(--border);background:var(--card);border-radius:8px;cursor:pointer;font-size:14px}
+    .grid{margin-top:20px;display:grid;grid-template-columns:1fr 380px;gap:22px}
+    .card{background:var(--card);border:1px solid var(--border);padding:18px;border-radius:10px}
+    .title{margin:0;font-size:20px}
+    .subtitle{font-size:14px;color:var(--muted);margin-top:4px;margin-bottom:12px}
+    .list{margin:10px 0;padding-left:20px}
+    .example{border-left:6px solid var(--green);background:#f7fff0;padding:12px;border-radius:8px;margin:14px 0}
+    .caution{border-left:6px solid var(--yellow);background:#fff9e6;padding:12px;border-radius:8px;margin:14px 0}
+    .deepbox{border-left:6px solid var(--blue);background:#f8faff;padding:14px;border-radius:10px;margin:16px 0}
+    .code{background:#f4f4f4;padding:12px;border-radius:8px;font-family:monospace;white-space:pre-wrap;margin:10px 0}
+    textarea,input{width:100%;padding:10px;border-radius:6px;border:1px solid var(--border)}
+    button{padding:10px 14px;border-radius:8px;border:none;cursor:pointer;margin-top:8px}
+    .green{background:var(--green)}
+    .yellow{background:var(--yellow)}
+    .swatch{width:48px;height:48px;border-radius:8px;border:1px solid var(--border)}
+    footer{margin-top:24px;color:var(--muted);font-size:13px;line-height:1.4}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- HEADER -->
+    <header>
+      <div class="logo">RI</div>
+      <div>
+        <h1>Plagiarism detection and prevention: a primer for researchers</h1>
+        <p class="lead">A full, deeply detailed guide with clear steps, many examples, strong UI pieces, and easy words so every PhD scholar can trust and use it.</p>
+      </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav>
+      <div class="navlink" onclick="jump('why')">Why this matters</div>
+      <div class="navlink" onclick="jump('types')">Kinds of plagiarism</div>
+      <div class="navlink" onclick="jump('deepcore')">Deep core rules</div>
+      <div class="navlink" onclick="jump('detect')">Detection guide</div>
+      <div class="navlink" onclick="jump('fix')">Fixing step-by-step</div>
+      <div class="navlink" onclick="jump('bigexample')">Full big example</div>
+      <div class="navlink" onclick="jump('images')">Image and table rules</div>
+      <div class="navlink" onclick="jump('ui')">UI & UX kit</div>
+      <div class="navlink" onclick="jump('faq')">FAQ</div>
+    </nav>
+
+    <div class="grid">
+      <main>
+
+        <!-- WHY SECTION -->
+        <section id="why" class="card">
+          <h2 class="title">Why this matters</h2>
+          <p class="subtitle">Clear writing shows your own mind. Bad copying breaks trust fast.</p>
+
+          <div class="deepbox">
+            <strong>What happens if you ignore this:</strong>
+            <ul class="list">
+              <li>Your paper can get rejected.</li>
+              <li>Your name can be blocked by journals.</li>
+              <li>Your work loses value because no one trusts it.</li>
+              <li>Your career takes real damage because retractions stay online forever.</li>
+            </ul>
+          </div>
+
+          <div class="example">
+            <strong>Easy truth:</strong> If you give credit and use your own words, you are safe. If you hide ideas, problems grow.
+          </div>
+        </section>
+
+        <!-- TYPES SECTION -->
+        <section id="types" class="card">
+          <h2 class="title">Kinds of plagiarism</h2>
+          <p class="subtitle">Use this list to classify every match you see.</p>
+
+          <ul class="list">
+            <li><strong>Word copy:</strong> same words, no quotes.</li>
+            <li><strong>Patch copy:</strong> swap a few words but keep same shape.</li>
+            <li><strong>Self-copy:</strong> use your old lines with no note.</li>
+            <li><strong>Idea steal:</strong> take someone’s core idea.</li>
+            <li><strong>Data steal:</strong> take numbers, tables, charts.</li>
+            <li><strong>Image reuse:</strong> use figures without permission.</li>
+          </ul>
+
+          <div class="caution"><strong>Note:</strong> Some copying is small in words but huge in meaning. Always check the idea, not just the phrasing.</div>
+        </section>
+
+        <!-- DEEP CORE RULES -->
+        <section id="deepcore" class="card">
+          <h2 class="title">Deep core rules you must follow</h2>
+          <p class="subtitle">These rules stop 99 percent of problems.</p>
+
+          <div class="deepbox">
+            <strong>Rule 1: Always say who found what.</strong>
+            <p>If you use someone’s finding, write their name and year. This shows respect and honesty.</p>
+
+            <div class="example">
+              <strong>Example:</strong> "Lopez (2018) found a drop in Z when X rises. We test if this drop holds in older groups." 
+            </div>
+          </div>
+
+          <div class="deepbox">
+            <strong>Rule 2: Use short, clean words.</strong>
+            <p>Long lines hide copying. Short words force you to think and rewrite.</p>
+          </div>
+
+          <div class="deepbox">
+            <strong>Rule 3: Show how your study is different.</strong>
+            <p>This proves you bring something new. Even if idea is old, your angle can be new.</p>
+
+            <div class="example">
+              <strong>Example:</strong> "Past work tested X in mice. We test X in real patients with stage 3 disease."
+            </div>
+          </div>
+        </section>
+
+        <!-- DETECTION SECTION -->
+        <section id="detect" class="card">
+          <h2 class="title">Detection guide</h2>
+          <p class="subtitle">Follow all steps. Do not skip any.</p>
+
+          <div class="deepbox">
+            <strong>Step A: Run a match tool</strong>
+            <p>Use a trusted checker. Save the full report.</p>
+            <div class="code">Check:
+- Overall percent
+- Top matched sources
+- Exact lines matched</div>
+            <div class="caution">Percent alone means nothing. Read the lines.</div>
+          </div>
+
+          <div class="deepbox">
+            <strong>Step B: Read the matched source</strong>
+            <p>Ask: Is this common fact? Is it a method? Is it a unique idea?</p>
+          </div>
+
+          <div class="deepbox">
+            <strong>Step C: Check figures and tables</strong>
+            <p>Do reverse image search. Read captions. Check if structure is same.</p>
+          </div>
+
+          <div class="deepbox">
+            <strong>Step D: Mark danger matches</strong>
+            <div class="code">High danger:
+- Unique ideas
+- Same structure
+- Same argument flow
+- Same figure or data layout</div>
+          </div>
+        </section>
+
+        <!-- FIX SECTION -->
+        <section id="fix" class="card">
+          <h2 class="title">Fixing step-by-step</h2>
+          <p class="subtitle">Use this every time you edit.</p>
+
+          <ol class="list">
+            <li>Make a list of all matched sentences.</li>
+            <li>Write beside each: Quote, Paraphrase, or Idea.</li>
+            <li>Rewrite fully using clean words.</li>
+            <li>Add a clear citation.</li>
+            <li>Explain how your work is different.</li>
+            <li>Fix figures: redraw or ask permission.</li>
+            <li>Create a change log.</li>
+          </ol>
+
+          <div class="example">
+            <strong>Before and after:</strong>
+            <div class="code">
+Before: "Chronic X triggers Y in all Z groups." (copied)
+After: "Past studies showed X may trigger Y in many Z groups (Khan 2020). We test if this link stays the same when Z ages."</div>
+          </div>
+        </section>
+
+        <!-- BIG EXAMPLE -->
+        <section id="bigexample" class="card">
+          <h2 class="title">Full big example</h2>
+          <p class="subtitle">Deep, long, clear example so no one gets lost.</p>
+
+          <div class="deepbox">
+            <strong>Scenario:</strong>
+            <p>Your match report shows 28 percent. Most lines come from one review paper.</p>
+          </div>
+
+          <div class="deepbox">
+            <strong>Step 1: Build match table</strong>
+            <div class="code">Sentence | Source | Why flagged | Action</div>
+            <p>Fill this for all lines. This gives clarity.</p>
+          </div>
+
+          <div class="deepbox">
+            <strong>Step 2: Rewrite all unique ideas</strong>
+            <div class="code">
+Matched: "Y rises when X drops due to Z." 
+Rewrite: "Past work linked drops in X with rises in Y because of Z (Singh 2019). We test if Z acts the same in older adults."</div>
+          </div>
+
+          <div class="deepbox">
+            <strong>Step 3: Explain your change</strong>
+            <p>Write one line: "We changed lines 12–18 to remove copied structure and added citations."</p>
+          </div>
+        </section>
+
+        <!-- IMAGE RULES -->
+        <section id="images" class="card">
+          <h2 class="title">Image and table rules</h2>
+          <p class="subtitle">Figures are often misused. Follow these.</p>
+
+          <div class="deepbox">
+            <strong>Rule 1: Never reuse without permission.</strong>
+            <p>Even if you change colors, you must cite and ask.</p>
+          </div>
+
+          <div class="deepbox">
+            <strong>Rule 2: Redraw with your own style.</strong>
+            <p>Keep same idea but use your layout. Add: "Adapted from Author Year".</p>
+          </div>
+
+          <div class="example">
+            <strong>Figure caption template:</strong>
+            <div class="code">Figure 3. Title. Short text. Source: created by authors. Adapted from Author Year.</div>
+          </div>
+        </section>
+
+        <!-- UI KIT -->
+        <section id="ui" class="card">
+          <h2 class="title">UI & UX kit for clean research pages</h2>
+          <p class="subtitle">Copy all parts. Use in your site or slides.</p>
+
+          <div class="example">
+            <strong>Green info box</strong>
+            <div class="code">&lt;div style="border-left:6px solid #8bc34a;padding:12px;background:#f7fff0"&gt;New finding here&lt;/div&gt;</div>
+          </div>
+
+          <div class="caution">
+            <strong>Yellow warning box</strong>
+            <div class="code">&lt;div style="border-left:6px solid #ffd54f;padding:12px;background:#fff9e6"&gt;Quote or warning&lt;/div&gt;</div>
+          </div>
+
+          <h3 style="margin-top:16px">Color swatches</h3>
+          <div style="display:flex;gap:10px;margin-top:8px">
+            <div class="swatch" style="background:var(--green)"></div>
+            <div class="swatch" style="background:var(--yellow)"></div>
+            <div class="swatch" style="background:#ffffff"></div>
+          </div>
+
+          <h3 style="margin-top:16px">Interactive rewrite tool</h3>
+          <textarea id="inp" rows="4" placeholder="Paste line to rewrite"></textarea>
+          <button class="green" onclick="suggest2()">Rewrite</button>
+          <div id="out" style="margin-top:10px"></div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="card">
+          <h2 class="title">FAQ</h2>
+          <p class="subtitle">Short and clear.</p>
+          <div class="list">
+            <li><strong>Can I reuse my text?</strong> Yes, but cite your old work and rewrite big chunks.</li>
+            <li><strong>Is percent fixed?</strong> No. Use as a flag.</li>
+            <li><strong>Can I use a figure?</strong> Only with permission or redraw.</li>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- SIDEBAR -->
+      <aside>
+        <div class="card">
+          <h3 class="title">Quick tools</h3>
+          <p class="subtitle">Use these small helpers fast.</p>
+
+          <div class="code">Checklist:
+- Run match tool
+- Read matches
+- Rewrite
+- Cite
+- Fix figures
+- Log changes</div>
+          <button class="green" onclick="copyCheck()">Copy checklist</button>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h3 class="title">Sample blocks</h3>
+          <div class="code">"Past work found X (Author Year). We test Y in our group."</div>
+          <div class="code">"Data adapted from Author Year; permission obtained."</div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      Use the rules always. Clean writing builds trust. Fix matches early.
+    </footer>
+  </div>
+
+  <script>
+    function jump(id){ location.hash=id }
+    function copyCheck(){ navigator.clipboard.writeText('Run tool
+Read matches
+Rewrite
+Cite
+Fix figures
+Log changes'); alert('Copied'); }
+    function suggest2(){
+      var t=document.getElementById('inp').value.trim();
+      if(!t){document.getElementById('out').innerText='Type something';return}
+      var r=t.replace(/(is|are|was|were|has|have)/gi,'may be');
+      document.getElementById('out').innerHTML='<div class="example"><strong>Rewrite:</strong><div>'+r+'</div><div class="small" style="margin-top:6px">Add cite</div></div>'
+    }
+  </script>
+</body>
+</html>
